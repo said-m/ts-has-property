@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@said-m/common/tslint.json"
+  ]
+}
