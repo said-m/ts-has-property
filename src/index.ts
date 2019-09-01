@@ -16,7 +16,9 @@ export default function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  Record<K, T[K]>
+  Required<{
+    [key in K]: T[K];
+  }>
 ) {
   if (!isPlainObject(object)) {
     return false;
