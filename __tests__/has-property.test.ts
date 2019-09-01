@@ -16,6 +16,7 @@ describe('1st argument type tests', () => {
 
   test('`Object.create(null)`', () => {
     const data: any = Object.create(null);
+    data[key] = key;
 
     expect(
       hasProperty(data, key),
