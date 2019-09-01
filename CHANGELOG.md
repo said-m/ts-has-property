@@ -16,6 +16,16 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.0.3] - 2019-09-01
+
+### Added
+- Настройки для `vscode`-а:
+  - Рекомендуемые расширения;
+  - Конфигурация дебагера для запуска открытого `jest`-теста.
+
+### Fixed
+- `any` для значений свойств проверяемых объектов, чтобы не конфликтовать с типизацией пользователей.
+
 ## [1.0.2] - 2019-09-01
 
 ### Added
@@ -28,15 +38,15 @@
 - Добавлены тесты;
 - Начал вестись `CHANGELOG.md`.
 
-### Fixed
-- Исправление бага с вызовом отсутствующего `hasOwnProperty` у объектов через `Object.create(null)` - обнаружен в ходе описания тестов.
-
 ### Changed
 - Внесены правки в `README.md`;
   - Исправлены опечатки;
   - Добавлена секция "Installing / Установка";
   - В секции "Usage / Использование" описаны принимаемые функцией параметры;
   - Добавлена секция "Navigation / Навигация".
+
+### Fixed
+- Исправление бага с вызовом отсутствующего `hasOwnProperty` у объектов через `Object.create(null)` - обнаружен в ходе описания тестов.
 
 ## [1.0.1] - 2019-08-31
 
@@ -54,7 +64,8 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.2...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.3...develop
+[1.0.3]: https://github.com/said-m/ts-has-property/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/said-m/ts-has-property/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/said-m/ts-has-property/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/said-m/ts-has-property/releases/tag/1.0.0
