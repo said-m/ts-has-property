@@ -21,5 +21,5 @@ export default function hasProperty<
     return false;
   }
 
-  return object.hasOwnProperty(property);
+  return Object.hasOwnProperty.call(object, property);
 }
