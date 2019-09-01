@@ -1,6 +1,6 @@
 {
   "name": "ts-has-property",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Better typed `hasOwnProperty` for IntelliSense.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
