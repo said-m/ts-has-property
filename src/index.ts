@@ -6,7 +6,8 @@ import { ObjectInterface } from '@said-m/common/dist/interfaces';
  * specified property as its own property
  */
 export default function hasProperty<
-  T extends ObjectInterface,
+  // tslint:disable-next-line: no-any
+  T extends ObjectInterface<any>,
   K extends keyof T
 >(
   object: T,
