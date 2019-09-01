@@ -16,6 +16,8 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.0.2] - 2019-09-01
+
 ### Added
 - Добавлены `devDependencies`:
   - `jest` + `@types/jest` - инструмент для тестирования;
@@ -23,7 +25,8 @@
 - Добавлены `npm`-скрипты:
   - `test` - старт тестов;
   - `test-coverage` - тесты с инфой о покрытие кода (зачем-то).
-- Добавлены тесты.
+- Добавлены тесты;
+- Начал вестись `CHANGELOG.md`.
 
 ### Fixed
 - Исправление бага с вызовом отсутствующего `hasOwnProperty` у объектов через `Object.create(null)` - обнаружен в ходе описания тестов.
@@ -51,6 +54,7 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.1...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.2...develop
+[1.0.2]: https://github.com/said-m/ts-has-property/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/said-m/ts-has-property/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/said-m/ts-has-property/releases/tag/1.0.0
