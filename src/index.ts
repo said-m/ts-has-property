@@ -1,4 +1,4 @@
-import { isPlainObject } from '@said-m/common';
+import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
 /**
@@ -11,15 +11,20 @@ export default function hasProperty<
   K extends keyof T
 >(
   object: T,
-  property: K,
+  property: K | Array<K>,
 ): object is (
   {
     [key in keyof T]: T[key];
-  } & Record<K, T[K]>
-) {
-  if (!isPlainObject(object)) {
-    return false;
+  } & {
+    [key in K]: T[key];
   }
+) {
+  const properties = isArray(property)
+    ? property
+    : [property];
 
-  return Object.hasOwnProperty.call(object, property);
+  return properties.every(
+    thisProperty => isPlainObject(object) &&
+      Object.hasOwnProperty.call(object, thisProperty),
+  );
 }
