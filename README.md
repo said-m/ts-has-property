@@ -67,6 +67,18 @@ if (hasProperty(obj, Keys.sth)) {
 
 ![Названия ключа из `enum`-а](assets/demo-enum.png)
 
+### Несколько ключей
+
+```ts
+// ...
+
+if (hasProperty(obj, ['someKey', 'yetAnotherKey'])) {
+  obj./* IDE:               */;
+      /*     someKey        */
+      /*     yetAnotherKey  */
+}
+```
+
 ## Note / Замечание
 
 ![Не объект первым аргументом - ts-ошибка](assets/demo-not-object.png)

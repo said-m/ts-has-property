@@ -16,6 +16,12 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.0.4] - 2019-09-04
+
+### Added
+- Возможность проверки наличия нескольких ключей;
+- Настройка `travis-ci` для авто-публикации релизов в `npm`.
+
 ## [1.0.3] - 2019-09-01
 
 ### Added
@@ -64,7 +70,8 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.3...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.4...develop
+[1.0.4]: https://github.com/said-m/ts-has-property/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/said-m/ts-has-property/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/said-m/ts-has-property/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/said-m/ts-has-property/compare/1.0.0...1.0.1
