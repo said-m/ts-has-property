@@ -8,59 +8,63 @@ const data: any = {
 };
 
 describe('1st argument type tests', () => {
-  test('`Object`', () => {
-    expect(
-      hasProperty(data, key),
-    ).toBeTruthy();
+  describe('Handles successfully', () => {
+    test('`Object`', () => {
+      expect(
+        hasProperty(data, key),
+      ).toBeTruthy();
+    });
+
+    test('`Object.create(null)`', () => {
+      const data: any = Object.create(null);
+      data[key] = key;
+
+      expect(
+        hasProperty(data, key),
+      ).toBeTruthy();
+    });
   });
 
-  test('`Object.create(null)`', () => {
-    const data: any = Object.create(null);
-    data[key] = key;
+  describe('Rejects data types', () => {
+    test('`Null`', () => {
+      const data: any = null;
 
-    expect(
-      hasProperty(data, key),
-    ).toBeTruthy();
-  });
+      expect(
+        hasProperty(data, key),
+      ).toBeFalsy();
+    });
 
-  test('`Null`', () => {
-    const data: any = null;
+    test('`Array`', () => {
+      const data: any = [];
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+      expect(
+        hasProperty(data, key),
+      ).toBeFalsy();
+    });
 
-  test('`Array`', () => {
-    const data: any = [];
+    test('`String`', () => {
+      const data: any = '';
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+      expect(
+        hasProperty(data, key),
+      ).toBeFalsy();
+    });
 
-  test('`String`', () => {
-    const data: any = '';
+    test('`Number`', () => {
+      const data: any = 27;
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+      expect(
+        hasProperty(data, key),
+      ).toBeFalsy();
+    });
 
-  test('`Number`', () => {
-    const data: any = 27;
+    test('`undefined`', () => {
+      const data: any = undefined;
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
-
-  test('`undefined`', () => {
-    const data: any = undefined;
-
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
+      expect(
+        hasProperty(data, key),
+      ).toBeFalsy();
+    });
   });
 });
 
@@ -104,5 +108,30 @@ describe('2nd argument tests', () => {
     expect(
       hasProperty(store, symbolKey),
     ).toBeTruthy();
+  });
+
+  test('`Array` of keys', () => {
+    const keys = [
+      'key1',
+      'key2',
+    ];
+    const store: any = {
+      [keys[0]]: undefined,
+      [keys[1]]: undefined,
+    };
+
+    expect(
+      hasProperty(store, keys),
+    ).toBeTruthy();
+
+    expect(
+      hasProperty(
+        data,
+        [
+          ...keys,
+          key,
+        ],
+      ),
+    ).toBeFalsy();
   });
 });
