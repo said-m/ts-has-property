@@ -1,6 +1,6 @@
 {
   "name": "ts-has-property",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Better typed `hasOwnProperty` for IntelliSense.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,8 @@
     "build": "tsc -p ./tsconfig.build.json",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jest.config.json",
-    "test-coverage": "yarn test --coverage",
+    "test:coverage": "yarn test --coverage",
+    "test-ci": "yarn test:coverage && cat ./coverage/lcov.info | coveralls",
     "prepack": "yarn build",
     "postpack": "rm -rf ./dist"
   },
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
+    "coveralls": "^3.0.6",
     "husky": "^3.0.4",
     "jest": "^24.9.0",
     "ts-jest": "^24.0.2",

@@ -1,8 +1,12 @@
-# has-property
+# ts-has-property
 
-Better typed `hasOwnProperty` for better IntelliSense - code hinting. Indicating whether the object has the specified property as its own property.
+Better typed `hasOwnProperty` for better IntelliSense - code hinting. Indicating whether the object has the specified property(-ies) as its own property(-ies).
 
-**RU**: Более типизированный аналог `hasOwnProperty` для улучшения подсказок при работе в IDE-шках (редакторах кода).
+[![npm version](https://badge.fury.io/js/ts-has-property.svg)](https://badge.fury.io/js/ts-has-property)
+[![Build Status](https://travis-ci.com/said-m/ts-has-property.svg?branch=master)](https://travis-ci.com/said-m/ts-has-property)
+[![Coverage Status](https://coveralls.io/repos/github/said-m/ts-has-property/badge.svg?branch=master)](https://coveralls.io/github/said-m/ts-has-property?branch=master)
+
+**RU**: Более типизированный аналог `hasOwnProperty` для **улучшения подсказок** при работе в IDE-шках (редакторах кода). Также, метод позволяет перечислить сразу **несколько ключей** для проверки и корректно проверяет коллекции, созданные через `Object.create(null)`.
 
 ## Navigation / Навигация
 

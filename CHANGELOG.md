@@ -16,6 +16,19 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.0.5] - 2019-09-04
+
+### Added
+- Добавлены значки:
+  - Актуальная npm-версия;
+  - Статус сборки;
+  - Покрытие кода тестами.
+- Добавлена `devDependencies`:
+  - `coveralls` - разбор результатов покрытия кода тестами.
+
+### Fixed
+- Исправление (надеюсь) условия в конфигурации `travis-ci` для публикации в `npm`.
+
 ## [1.0.4] - 2019-09-04
 
 ### Added
@@ -70,7 +83,8 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.4...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.5...develop
+[1.0.5]: https://github.com/said-m/ts-has-property/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/said-m/ts-has-property/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/said-m/ts-has-property/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/said-m/ts-has-property/compare/1.0.1...1.0.2
