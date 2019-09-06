@@ -16,6 +16,20 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.1.0] - 2019-09-07
+
+### Added
+- Функционал проверки наличия значения у свойства (не `undefined` или `null`);
+- Функционал проверки типа значения: `'string'`, `'number'`, `'array'`, `'object'`.
+
+### Changed
+- Файл с тестами аргументов разбит на соответствующие файлы;
+- Небольшие правки в описании модуля:
+  - Описание в `package.json`;
+  - Описание в `README.md`;
+  - Дисклеймер о `SemVer`;
+  - Значок об `jest`-а - форсю, потому что он клёвый.
+
 ## [1.0.5] - 2019-09-04
 
 ### Added
@@ -83,7 +97,8 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.0.5...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.1.0...develop
+[1.1.0]: https://github.com/said-m/ts-has-property/compare/1.0.5...1.1.0
 [1.0.5]: https://github.com/said-m/ts-has-property/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/said-m/ts-has-property/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/said-m/ts-has-property/compare/1.0.2...1.0.3
