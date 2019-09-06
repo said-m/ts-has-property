@@ -2,7 +2,7 @@ import hasProperty from '../src';
 
 const data: Record<
   'key' | 'number' | 'object' | 'array' | 'null' | 'undefined',
-  any
+  unknown
 > = {
   key: 'sample text',
   number: NaN,

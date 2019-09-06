@@ -3,6 +3,14 @@ import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
 // tslint:disable-next-line: no-any
 type FirstArgumentInterface = ObjectInterface<any>;
+type ExtractDefaultOrSet<T, U> = T extends U
+  ? T
+  // tslint:disable-next-line: no-any
+  : T extends any
+    ? U
+    : T extends unknown
+      ? U
+      : never;
 
 export type HasPropertyExistInterface = 'string' | 'number' | 'object' | 'array';
 
@@ -52,7 +60,7 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   {
-    [key in K]: Extract<T[key], string>;
+    [key in K]: ExtractDefaultOrSet<T[key], string>;
   }
 );
 
@@ -69,7 +77,7 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   {
-    [key in K]: Extract<T[key], number>;
+    [key in K]: ExtractDefaultOrSet<T[key], number>;
   }
 );
 
@@ -86,7 +94,7 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   {
-    [key in K]: Extract<T[key], ObjectInterface>;
+    [key in K]: ExtractDefaultOrSet<T[key], ObjectInterface>;
   }
 );
 
@@ -103,7 +111,7 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   {
-    [key in K]: Extract<T[key], Array<T[key][0]>>;
+    [key in K]: ExtractDefaultOrSet<T[key], Array<T[key][0]>>;
   }
 );
 

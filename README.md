@@ -64,6 +64,8 @@ if (hasProperty(data, 'someKey')) {
 
 ### `Required<>` values / Обязательность значений
 
+> **[!]**: `any` -> `unknown`
+
 **EN**: If you only need non-`null`/`undefined` property, there is shortcut for you, see listing below;
 **RU**: В обычном режиме проверяется только наличие ключа, однако, если его значение может быть `undefined` или `null`, то в большинстве условиях потребуется дополнительная проверка для осуществления дальнейшего чейнинга значения. Поэтому, в функции предусмотрен шорткат, позволяющий проверить свойство на нененулевое значение:
 ```ts
@@ -86,6 +88,8 @@ if (
 ```
 
 ### Value type check / Принадлежность значения типу
+
+> **[!]**: `any` -> `unknown`
 
 **EN**: If we have a value that has a [`union type`](union-types), but only a certain one is required, there is a shortcut - 3rd argument, see listing below; \
 **RU**: Если значение свойства может принадлежать одному из нескольких типов, а требуется только определённый, то и на этот случай имеется шорткат:
