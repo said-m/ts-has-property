@@ -112,7 +112,9 @@ function hasProperty<
         return false;
       }
 
-      if (isRequired) {
+      const hasStatus = Object.hasOwnProperty.call(object, thisProperty);
+
+      if (isRequired && hasStatus) {
         const value = object[thisProperty];
 
         switch (isRequired) {
@@ -128,7 +130,7 @@ function hasProperty<
         }
       }
 
-      return Object.hasOwnProperty.call(object, thisProperty);
+      return hasStatus;
     },
   );
 }
