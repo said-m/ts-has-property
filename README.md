@@ -9,12 +9,19 @@ Better typed `hasOwnProperty` for better IntelliSense - code hinting. Supports c
 
 **RU**: Более типизированный аналог `hasOwnProperty` для **улучшения подсказок** при работе в IDE-шках (редакторах кода). Также, метод позволяет перечислить сразу **несколько ключей** для проверки и корректно проверяет коллекции, созданные через `Object.create(null)`.
 
+> * Do not use `any` type, please.
+> * Use `unknown` if you thought about `any`.
+> * If you working with third party module and have to suffer from `any`, so `ts-has-property` may be very useful, may-be...
+
 ## Navigation / Навигация
 
 > [Read on repo-page](./README.md)
 
 * [Installing / Установка](#Installing--Установка)
-* [Usage / Использование](#Usage--Использование)
+* Usage / Использование
+  * [The basics / Основы](#Usage--Использование)
+  * [`Required<>` values / Обязательность значений](#Required-values--Обязательность-значений)
+  * [Value type check / Принадлежность значения типу](#Value-type-check--Принадлежность-значения-типу)
 * [Demo / Демонстрация](#Demo--Демонстрация)
   * [`Enum` member values / Пример с `Enum`-ом](#Enum-member-values--Пример-с-Enum-ом)
   * [Multiple keys / Несколько ключей](#Multiple-keys--Несколько-ключей)
@@ -55,6 +62,50 @@ if (hasProperty(data, 'someKey')) {
 > **EN**: If 1st argument is not an object => `false`; tsc will inform you about typing errors if possible. @see [Note](#note--замечание). \
 > **RU**: Если первым аргументом передан не объект, то функция вернёт `false`; tsc сообщит об ошибке, если сможет проверить тип передаваемого значения до рантайма. Подробнее: см. [Замечание](#note--замечание).
 
+### `Required<>` values / Обязательность значений
+
+**EN**: If you only need non-`null`/`undefined` property, there is shortcut for you, see listing below;
+**RU**: В обычном режиме проверяется только наличие ключа, однако, если его значение может быть `undefined` или `null`, то в большинстве условиях потребуется дополнительная проверка для осуществления дальнейшего чейнинга значения. Поэтому, в функции предусмотрен шорткат, позволяющий проверить свойство на нененулевое значение:
+```ts
+const data: {
+  title: string;
+  description?: string; // string | undefined
+  // ...
+} = getData(/* ... */);
+
+data.description = undefined; // - `data` has property `description`
+
+if (
+  hasProperty(data, 'description', true) // 👈 `true`
+) {
+  // ...
+  console.log(data.someKey.toString());
+} else {
+  console.log(`Data's own property '${ key }' has no value`);
+}
+```
+
+### Value type check / Принадлежность значения типу
+
+**EN**: If we have a value that has a [`union type`](union-types), but only a certain one is required, there is a shortcut - 3rd argument, see listing below; \
+**RU**: Если значение свойства может принадлежать одному из нескольких типов, а требуется только определённый, то и на этот случай имеется шорткат:
+```ts
+const data: Record<       // - object
+  string,                 // - type of key
+  number | Array<number>  // - type of value
+> = getData(/* ... */);
+
+const sum = hasProperty(data, 'key', 'array')   // 👈 `'array'`
+  ? data.key.reduce((prev, cur) => prev + cur)  // `data.key: Array<number>`
+  : data.key                                    // `data.key: number`
+```
+
+Possible argument values / Возможные значения:
+* `'string'`
+* `'number'`
+* `'object'`
+* `'array'`
+
 ## Demo / Демонстрация
 
 ![После проверки стандартным `Object.hasOwnProperty`, VSCode не предлагает проверенного ключа, а после проверки при помощи `hasProperty` ключ в подсказках предлагается](assets/demo.gif)
@@ -91,6 +142,10 @@ if (hasProperty(obj, ['someKey', 'yetAnotherKey'])) {
 }
 ```
 
+### Type check / Проверка типа
+
+![При проверке на базовые типы, функция возвращает `true` только значения, которое соответствует ему. При этом сохраняются пользовательские интерфейсы.](assets/demo-type-check.gif)
+
 ## Note / Замечание
 
 ![Не объект первым аргументом - ts-ошибка](assets/demo-not-object.png)
@@ -111,3 +166,5 @@ Said Magomedov - [GitHub][github] // [NPM][npm] // [VK][vk]
 [github]: https://github.com/said-m
 [npm]: https://www.npmjs.com/~said-m
 [vk]: https://vk.com/id266788473
+
+[union-types]: https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types
