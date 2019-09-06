@@ -1,18 +1,23 @@
 # ts-has-property
 
-Better typed `hasOwnProperty` for better IntelliSense - code hinting. Indicating whether the object has the specified property(-ies) as its own property(-ies).
+Better typed `hasOwnProperty` for better IntelliSense - code hinting. Supports checking multiple keys at a time and optionally checks if the value(s) belongs to the specified type (interface).
 
 [![npm version](https://badge.fury.io/js/ts-has-property.svg)](https://badge.fury.io/js/ts-has-property)
 [![Build Status](https://travis-ci.com/said-m/ts-has-property.svg?branch=master)](https://travis-ci.com/said-m/ts-has-property)
 [![Coverage Status](https://coveralls.io/repos/github/said-m/ts-has-property/badge.svg?branch=master)](https://coveralls.io/github/said-m/ts-has-property?branch=master)
+[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
 **RU**: Более типизированный аналог `hasOwnProperty` для **улучшения подсказок** при работе в IDE-шках (редакторах кода). Также, метод позволяет перечислить сразу **несколько ключей** для проверки и корректно проверяет коллекции, созданные через `Object.create(null)`.
 
 ## Navigation / Навигация
 
+> [Read on repo-page](./README.md)
+
 * [Installing / Установка](#Installing--Установка)
 * [Usage / Использование](#Usage--Использование)
 * [Demo / Демонстрация](#Demo--Демонстрация)
+  * [`Enum` member values / Пример с `Enum`-ом](#Enum-member-values--Пример-с-Enum-ом)
+  * [Multiple keys / Несколько ключей](#Multiple-keys--Несколько-ключей)
 * [Note / Замечание](#Note--Замечание)
 * [Author / Автор](#Author--Автор)
 * [License / Лицензия](#License--Лицензия)
@@ -20,12 +25,15 @@ Better typed `hasOwnProperty` for better IntelliSense - code hinting. Indicating
 ## Installing / Установка
 
 ```bash
-yarn add ts-has-property
+yarn add ts-has-property -T
 ```
 or, if you prefer `npm`:
 ```bash
-npm i ts-has-property
+npm i ts-has-property -E
 ```
+
+> **EN**: `SemVer` is not guaranteed; \
+> **RU**: Соблюдение `SemVer` не гарантируется.
 
 ## Usage / Использование
 
@@ -53,7 +61,7 @@ if (hasProperty(data, 'someKey')) {
 
 > Не обязательно явной строкой указывать название ключа, как это демонстрируется в gif-ке, ключ также может храниться в `const`-те или `enum`-е. Главное, чтобы IDE была точно уверенна в содержимом передаваемого параметра.
 
-### Пример с `Enum`-ом
+### `Enum` member values / Пример с `Enum`-ом
 
 ```ts
 const obj: {
@@ -71,7 +79,7 @@ if (hasProperty(obj, Keys.sth)) {
 
 ![Названия ключа из `enum`-а](assets/demo-enum.png)
 
-### Несколько ключей
+### Multiple keys / Несколько ключей
 
 ```ts
 // ...
