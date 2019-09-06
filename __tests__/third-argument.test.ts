@@ -1,11 +1,14 @@
 import hasProperty from '../src';
 
 const data: Record<
-  'key' | 'number' | 'null' | 'undefined',
-  string | number | null | undefined
+  'key' | 'number' | 'null' | 'object' | 'undefined',
+  any
 > = {
   key: 'sample text',
   number: NaN,
+  object: {
+    number: 27,
+  },
   null: null,
   undefined,
 };
@@ -67,6 +70,26 @@ test('`Number`', () => {
       data,
       'null',
       'number',
+    ),
+  ).toBeFalsy();
+});
+
+test('`Object`', () => {
+  expect(
+    hasProperty(
+      data,
+      'object',
+      'object',
+    ),
+  ).toBeTruthy();
+
+  // typeof null === 'object',
+  // but We talking about true Objects
+  expect(
+    hasProperty(
+      data,
+      'null',
+      'object',
     ),
   ).toBeFalsy();
 });
