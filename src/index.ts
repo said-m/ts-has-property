@@ -1,11 +1,10 @@
 import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
-export type HasPropertyExistInterface = 'string';
-
-export default hasProperty;
 // tslint:disable-next-line: no-any
 type FirstArgumentInterface = ObjectInterface<any>;
+
+export type HasPropertyExistInterface = 'string' | 'number';
 
 /** Проверка наличия ключа */
 function hasProperty<
@@ -57,6 +56,23 @@ function hasProperty<
   }
 );
 
+/** Проверка наличия ключа с числовым значением */
+function hasProperty<
+  T extends FirstArgumentInterface,
+  K extends keyof T
+>(
+  object: T,
+  property: K | Array<K>,
+  isExist: 'number',
+): object is (
+  {
+    [key in keyof T]: T[key];
+  } &
+  {
+    [key in K]: Extract<T[key], number>;
+  }
+);
+
 /**
  * Indicating whether the object has the
  * specified property as its own property
@@ -67,7 +83,7 @@ function hasProperty<
 >(
   object: T,
   property: K | Array<K>,
-  isRequired: boolean | string | void,
+  isRequired: boolean | HasPropertyExistInterface | void,
 ) {
   const properties = isArray(property)
     ? property
@@ -88,6 +104,8 @@ function hasProperty<
             value !== null;
           case 'string':
             return typeof value === 'string';
+          case 'number':
+            return typeof value === 'number';
         }
       }
 
@@ -95,3 +113,5 @@ function hasProperty<
     },
   );
 }
+
+export default hasProperty;

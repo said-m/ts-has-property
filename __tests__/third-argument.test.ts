@@ -1,10 +1,11 @@
 import hasProperty from '../src';
 
 const data: Record<
-  'key' | 'null' | 'undefined',
-  'string' | null | undefined
+  'key' | 'number' | 'null' | 'undefined',
+  string | number | null | undefined
 > = {
-  key: 'string',
+  key: 'sample text',
+  number: NaN,
   null: null,
   undefined,
 };
@@ -48,6 +49,24 @@ test('`String`', () => {
       data,
       'null',
       'string',
+    ),
+  ).toBeFalsy();
+});
+
+test('`Number`', () => {
+  expect(
+    hasProperty(
+      data,
+      'number',
+      'number',
+    ),
+  ).toBeTruthy();
+
+  expect(
+    hasProperty(
+      data,
+      'null',
+      'number',
     ),
   ).toBeFalsy();
 });
