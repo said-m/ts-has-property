@@ -135,3 +135,43 @@ describe('2nd argument tests', () => {
     ).toBeFalsy();
   });
 });
+
+describe('3rd argument tests', () => {
+  test('Required value (not null or undefined)', () => {
+    const obj: Record<
+      'key' | 'null' | 'undefined',
+      string | null | undefined
+    > = {
+      key: 'string',
+      null: null,
+      undefined,
+    };
+
+    expect(
+      obj.valueOf,
+    ).toBeDefined();
+
+    expect(
+      hasProperty(
+        obj,
+        ['key', 'null', 'undefined'],
+      ),
+    ).toBeTruthy();
+
+    expect(
+      hasProperty(
+        obj,
+        ['key', 'null'],
+        true,
+      ),
+    ).toBeFalsy();
+
+    expect(
+      hasProperty(
+        obj,
+        ['key', 'undefined'],
+        true,
+      ),
+    ).toBeFalsy();
+  });
+});
