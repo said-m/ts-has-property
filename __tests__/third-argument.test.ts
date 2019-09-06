@@ -2,7 +2,7 @@ import hasProperty from '../src';
 
 const data: Record<
   'key' | 'null' | 'undefined',
-  string | null | undefined
+  'string' | null | undefined
 > = {
   key: 'string',
   null: null,
@@ -30,6 +30,24 @@ test('Required value(-s) (not `null` or `undefined`)', () => {
       data,
       ['key', 'undefined'],
       true,
+    ),
+  ).toBeFalsy();
+});
+
+test('`String`', () => {
+  expect(
+    hasProperty(
+      data,
+      'key',
+      'string',
+    ),
+  ).toBeTruthy();
+
+  expect(
+    hasProperty(
+      data,
+      'null',
+      'string',
     ),
   ).toBeFalsy();
 });

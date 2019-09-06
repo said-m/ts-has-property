@@ -1,6 +1,8 @@
 import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
+export type HasPropertyExistInterface = 'string';
+
 export default hasProperty;
 // tslint:disable-next-line: no-any
 type FirstArgumentInterface = ObjectInterface<any>;
@@ -28,13 +30,30 @@ function hasProperty<
 >(
   object: T,
   property: K | Array<K>,
-  isExist: boolean,
+  isExist: true,
 ): object is (
   {
     [key in keyof T]: T[key];
   } &
   {
     [key in K]: Exclude<T[key], undefined | null>;
+  }
+);
+
+/** Проверка наличия ключа со строковым значением */
+function hasProperty<
+  T extends FirstArgumentInterface,
+  K extends keyof T
+>(
+  object: T,
+  property: K | Array<K>,
+  isExist: 'string',
+): object is (
+  {
+    [key in keyof T]: T[key];
+  } &
+  {
+    [key in K]: Extract<T[key], string>;
   }
 );
 
@@ -48,7 +67,7 @@ function hasProperty<
 >(
   object: T,
   property: K | Array<K>,
-  isRequired: boolean | void,
+  isRequired: boolean | string | void,
 ) {
   const properties = isArray(property)
     ? property
@@ -60,11 +79,16 @@ function hasProperty<
         return false;
       }
 
-      if (isRequired === true) {
+      if (isRequired) {
         const value = object[thisProperty];
 
-        return value !== undefined &&
-        value !== null;
+        switch (isRequired) {
+          case true:
+            return value !== undefined &&
+            value !== null;
+          case 'string':
+            return typeof value === 'string';
+        }
       }
 
       return Object.hasOwnProperty.call(object, thisProperty);
