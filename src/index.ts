@@ -4,7 +4,7 @@ import { ObjectInterface } from '@said-m/common/dist/interfaces';
 // tslint:disable-next-line: no-any
 type FirstArgumentInterface = ObjectInterface<any>;
 
-export type HasPropertyExistInterface = 'string' | 'number' | 'object';
+export type HasPropertyExistInterface = 'string' | 'number' | 'object' | 'array';
 
 /** Проверка наличия ключа */
 function hasProperty<
@@ -73,7 +73,7 @@ function hasProperty<
   }
 );
 
-/** Проверка наличия ключа с объектом в значением */
+/** Проверка наличия ключа с объектом в значении */
 function hasProperty<
   T extends FirstArgumentInterface,
   K extends keyof T
@@ -87,6 +87,23 @@ function hasProperty<
   } &
   {
     [key in K]: Extract<T[key], ObjectInterface>;
+  }
+);
+
+/** Проверка наличия ключа с массивом в значении */
+function hasProperty<
+  T extends FirstArgumentInterface,
+  K extends keyof T
+>(
+  object: T,
+  property: K | Array<K>,
+  isExist: 'array',
+): object is (
+  {
+    [key in keyof T]: T[key];
+  } &
+  {
+    [key in K]: Extract<T[key], Array<T[key][0]>>;
   }
 );
 
@@ -127,6 +144,8 @@ function hasProperty<
             return typeof value === 'number';
           case 'object':
             return isPlainObject(value);
+          case 'array':
+            return isArray(value);
         }
       }
 
