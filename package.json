@@ -1,7 +1,7 @@
 {
   "name": "ts-has-property",
-  "version": "1.0.5",
-  "description": "Better typed `hasOwnProperty` for IntelliSense.",
+  "version": "1.1.0",
+  "description": "Better typed `hasOwnProperty` for IntelliSense. Supports checking multiple keys at a time and type of values.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Said Magomedov <saids.inbox@gmail.com>",

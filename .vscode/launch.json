@@ -5,6 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Test all (Jest)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "cwd": "${workspaceRoot}",
+      "args": [
+        "--i",
+        "--config", "jest.config.json"
+      ]
+    },
+    {
       "name": "Test current (Jest)",
       "type": "node",
       "request": "launch",
