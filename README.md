@@ -105,6 +105,7 @@ const sum = hasProperty(data, 'key', 'array')   // 👈 `'array'`
 ```
 
 Possible argument values / Возможные значения:
+* `'boolean'`
 * `'string'`
 * `'number'`
 * `'object'`
