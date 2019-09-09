@@ -2,7 +2,7 @@ import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
 // tslint:disable-next-line: no-any
-type FirstArgumentInterface = ObjectInterface<any>;
+type FirstArgumentInterface = unknown | ObjectInterface<any>;
 type ExtractDefaultOrSet<T, U> = T extends U
   ? T
   // tslint:disable-next-line: no-any
@@ -17,7 +17,7 @@ export type HasPropertyExistInterface = 'boolean' | 'string' | 'number' | 'objec
 /** Проверка наличия ключа */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -26,14 +26,16 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } & {
-    [key in K]: T[key];
+    [key in K]:
+      // @ts-ignore
+      T[key];
   }
 );
 
 /** Проверка наличия ключа и его значения */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -43,14 +45,18 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: Exclude<T[key], undefined | null>;
+    [key in K]: Exclude<
+      // @ts-ignore
+      T[key],
+      undefined | null
+    >;
   }>
 );
 
 /** Проверка наличия ключа с булевым значением */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -60,14 +66,18 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], boolean>;
+    [key in K]: ExtractDefaultOrSet<
+      // @ts-ignore
+      T[key],
+      boolean
+    >;
   }>
 );
 
 /** Проверка наличия ключа со строковым значением */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -77,14 +87,18 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], string>;
+    [key in K]: ExtractDefaultOrSet<
+      // @ts-ignore
+      T[key],
+      string
+    >;
   }>
 );
 
 /** Проверка наличия ключа с числовым значением */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -94,14 +108,18 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], number>;
+    [key in K]: ExtractDefaultOrSet<
+      // @ts-ignore
+      T[key],
+      number
+    >;
   }>
 );
 
 /** Проверка наличия ключа с объектом в значении */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -111,14 +129,18 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], ObjectInterface>;
+    [key in K]: ExtractDefaultOrSet<
+      // @ts-ignore
+      T[key],
+      ObjectInterface
+    >;
   }>
 );
 
 /** Проверка наличия ключа с массивом в значении */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -128,7 +150,14 @@ function hasProperty<
     [key in keyof T]: T[key];
   } &
   Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], Array<T[key][0]>>;
+    [key in K]: ExtractDefaultOrSet<
+      // @ts-ignore
+      T[key],
+      Array<
+        // @ts-ignore
+        T[key][0]
+      >
+    >;
   }>
 );
 
@@ -138,7 +167,7 @@ function hasProperty<
  */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof T
+  K extends keyof Exclude<T, unknown>
 >(
   object: T,
   property: K | Array<K>,
@@ -157,6 +186,7 @@ function hasProperty<
       const hasStatus = Object.hasOwnProperty.call(object, thisProperty);
 
       if (isRequired && hasStatus) {
+        // @ts-ignore
         const value = object[thisProperty];
 
         switch (isRequired) {
