@@ -12,7 +12,7 @@ type ExtractDefaultOrSet<T, U> = T extends U
       ? U
       : never;
 
-export type HasPropertyExistInterface = 'string' | 'number' | 'object' | 'array';
+export type HasPropertyExistInterface = 'boolean' | 'string' | 'number' | 'object' | 'array';
 
 /** Проверка наличия ключа */
 function hasProperty<
@@ -42,9 +42,26 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: Exclude<T[key], undefined | null>;
-  }
+  }>
+);
+
+/** Проверка наличия ключа с булевым значением */
+function hasProperty<
+  T extends FirstArgumentInterface,
+  K extends keyof T
+>(
+  object: T,
+  property: K | Array<K>,
+  isExist: 'boolean',
+): object is (
+  {
+    [key in keyof T]: T[key];
+  } &
+  Required<{
+    [key in K]: ExtractDefaultOrSet<T[key], boolean>;
+  }>
 );
 
 /** Проверка наличия ключа со строковым значением */
@@ -59,9 +76,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], string>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с числовым значением */
@@ -76,9 +93,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], number>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с объектом в значении */
@@ -93,9 +110,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], ObjectInterface>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с массивом в значении */
@@ -110,9 +127,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], Array<T[key][0]>>;
-  }
+  }>
 );
 
 /**
@@ -146,6 +163,8 @@ function hasProperty<
           case true:
             return value !== undefined &&
             value !== null;
+          case 'boolean':
+            return typeof value === 'boolean';
           case 'string':
             return typeof value === 'string';
           case 'number':

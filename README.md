@@ -64,9 +64,9 @@ if (hasProperty(data, 'someKey')) {
 
 ### `Required<>` values / Обязательность значений
 
-> **[!]**: `any` -> `unknown`
+> **[ℹ️]**: `any` === 👎 && `unknown` === 👍
 
-**EN**: If you only need non-`null`/`undefined` property, there is shortcut for you, see listing below;
+**EN**: If you only need non-`null`/`undefined` property, there is shortcut for you, see listing below; \
 **RU**: В обычном режиме проверяется только наличие ключа, однако, если его значение может быть `undefined` или `null`, то в большинстве условиях потребуется дополнительная проверка для осуществления дальнейшего чейнинга значения. Поэтому, в функции предусмотрен шорткат, позволяющий проверить свойство на нененулевое значение:
 ```ts
 const data: {
@@ -81,15 +81,15 @@ if (
   hasProperty(data, 'description', true) // 👈 `true`
 ) {
   // ...
-  console.log(data.someKey.toString());
+  console.log(data.description.toString());
 } else {
-  console.log(`Data's own property '${ key }' has no value`);
+  console.log(`Data's own property 'description' has no value`);
 }
 ```
 
 ### Value type check / Принадлежность значения типу
 
-> **[!]**: `any` -> `unknown`
+> **[ℹ️]**: `any` === 👎 && `unknown` === 👍
 
 **EN**: If we have a value that has a [`union type`](union-types), but only a certain one is required, there is a shortcut - 3rd argument, see listing below; \
 **RU**: Если значение свойства может принадлежать одному из нескольких типов, а требуется только определённый, то и на этот случай имеется шорткат:
@@ -105,10 +105,13 @@ const sum = hasProperty(data, 'key', 'array')   // 👈 `'array'`
 ```
 
 Possible argument values / Возможные значения:
+* `'boolean'`
 * `'string'`
 * `'number'`
 * `'object'`
 * `'array'`
+
+> see [gif demo](#Type-check--Проверка-типа)
 
 ## Demo / Демонстрация
 
