@@ -29,11 +29,6 @@
     "prepack": "yarn build",
     "postpack": "rm -rf ./dist"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
-  },
   "dependencies": {
     "@said-m/common": "^0.0.1"
   },
