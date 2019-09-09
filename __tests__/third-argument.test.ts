@@ -1,11 +1,12 @@
 import hasProperty from '../src';
 
 const data: Record<
-  'key' | 'number' | 'object' | 'array' | 'null' | 'undefined',
+  'key' | 'number' | 'boolean' | 'object' | 'array' | 'null' | 'undefined',
   unknown
 > = {
   key: 'sample text',
   number: NaN,
+  boolean: false,
   object: {},
   array: [],
   null: null,
@@ -108,6 +109,25 @@ test('`Array`', () => {
       data,
       'null',
       'array',
+    ),
+  ).toBeFalsy();
+});
+
+test('`Boolean`', () => {
+  expect(
+    hasProperty(
+      data,
+      'boolean',
+      'boolean',
+    ),
+  ).toBeTruthy();
+
+  // убеждаемся, что `false` случается
+  expect(
+    hasProperty(
+      data,
+      'key',
+      'boolean',
     ),
   ).toBeFalsy();
 });

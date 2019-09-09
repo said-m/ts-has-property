@@ -12,7 +12,7 @@ type ExtractDefaultOrSet<T, U> = T extends U
       ? U
       : never;
 
-export type HasPropertyExistInterface = 'string' | 'number' | 'object' | 'array';
+export type HasPropertyExistInterface = 'boolean' | 'string' | 'number' | 'object' | 'array';
 
 /** Проверка наличия ключа */
 function hasProperty<
@@ -44,6 +44,23 @@ function hasProperty<
   } &
   Required<{
     [key in K]: Exclude<T[key], undefined | null>;
+  }>
+);
+
+/** Проверка наличия ключа с булевым значением */
+function hasProperty<
+  T extends FirstArgumentInterface,
+  K extends keyof T
+>(
+  object: T,
+  property: K | Array<K>,
+  isExist: 'boolean',
+): object is (
+  {
+    [key in keyof T]: T[key];
+  } &
+  Required<{
+    [key in K]: ExtractDefaultOrSet<T[key], boolean>;
   }>
 );
 
@@ -146,6 +163,8 @@ function hasProperty<
           case true:
             return value !== undefined &&
             value !== null;
+          case 'boolean':
+            return typeof value === 'boolean';
           case 'string':
             return typeof value === 'string';
           case 'number':
