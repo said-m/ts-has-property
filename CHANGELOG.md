@@ -16,6 +16,17 @@
 
 Пока не в версии, но уже сделано.
 
+## [1.1.1] - 2019-09-09
+
+### Added
+- Функционал проверки типа значения: `'boolean'`.
+
+### Changed
+- Вынес конфигурацию `husky` в отдельный файл и добавил вызов скрипта `test` на `pre-commit`.
+
+### Fixed
+- `Required` у ключей с проверенными значениями.
+
 ## [1.1.0] - 2019-09-07
 
 ### Added
@@ -97,7 +108,8 @@
 - `Git LFS` для всех ассетов.
 
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.1.0...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.1.1...develop
+[1.1.1]: https://github.com/said-m/ts-has-property/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/said-m/ts-has-property/compare/1.0.5...1.1.0
 [1.0.5]: https://github.com/said-m/ts-has-property/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/said-m/ts-has-property/compare/1.0.3...1.0.4
