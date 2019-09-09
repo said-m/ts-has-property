@@ -42,9 +42,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: Exclude<T[key], undefined | null>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа со строковым значением */
@@ -59,9 +59,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], string>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с числовым значением */
@@ -76,9 +76,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], number>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с объектом в значении */
@@ -93,9 +93,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], ObjectInterface>;
-  }
+  }>
 );
 
 /** Проверка наличия ключа с массивом в значении */
@@ -110,9 +110,9 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } &
-  {
+  Required<{
     [key in K]: ExtractDefaultOrSet<T[key], Array<T[key][0]>>;
-  }
+  }>
 );
 
 /**
