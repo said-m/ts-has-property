@@ -2,7 +2,8 @@ import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
 
 // tslint:disable-next-line: no-any
-type FirstArgumentInterface = unknown | ObjectInterface<any>;
+type FirstArgumentInterface = ObjectInterface<any>;
+type UnknownKeysInterface = keyof ObjectInterface<unknown>;
 type ExtractDefaultOrSet<T, U> = T extends U
   ? T
   // tslint:disable-next-line: no-any
@@ -12,12 +13,27 @@ type ExtractDefaultOrSet<T, U> = T extends U
       ? U
       : never;
 
-export type HasPropertyExistInterface = 'boolean' | 'string' | 'number' | 'object' | 'array';
+export type HasPropertyExistInterface = true |
+  'boolean' |
+  'string' |
+  'number' |
+  'object' |
+  'array';
 
 /** Проверка наличия ключа */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: void,
+): object is {
+  [key in K]: unknown;
+};
+/** Проверка наличия ключа */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -26,16 +42,24 @@ function hasProperty<
   {
     [key in keyof T]: T[key];
   } & {
-    [key in K]:
-      // @ts-ignore
-      T[key];
+    [key in K]: T[key];
   }
 );
 
 /** Проверка наличия ключа и его значения */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: true,
+): object is {
+  [key in K]: unknown;
+};
+/** Проверка наличия ключа и его значения */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -46,7 +70,6 @@ function hasProperty<
   } &
   Required<{
     [key in K]: Exclude<
-      // @ts-ignore
       T[key],
       undefined | null
     >;
@@ -55,8 +78,18 @@ function hasProperty<
 
 /** Проверка наличия ключа с булевым значением */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: 'boolean',
+): object is {
+  [key in K]: boolean;
+};
+/** Проверка наличия ключа с булевым значением */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -67,7 +100,6 @@ function hasProperty<
   } &
   Required<{
     [key in K]: ExtractDefaultOrSet<
-      // @ts-ignore
       T[key],
       boolean
     >;
@@ -76,8 +108,18 @@ function hasProperty<
 
 /** Проверка наличия ключа со строковым значением */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: 'string',
+): object is {
+  [key in K]: string;
+};
+/** Проверка наличия ключа со строковым значением */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -88,7 +130,6 @@ function hasProperty<
   } &
   Required<{
     [key in K]: ExtractDefaultOrSet<
-      // @ts-ignore
       T[key],
       string
     >;
@@ -97,8 +138,18 @@ function hasProperty<
 
 /** Проверка наличия ключа с числовым значением */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: 'number',
+): object is {
+  [key in K]: number;
+};
+/** Проверка наличия ключа с числовым значением */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -109,7 +160,6 @@ function hasProperty<
   } &
   Required<{
     [key in K]: ExtractDefaultOrSet<
-      // @ts-ignore
       T[key],
       number
     >;
@@ -118,8 +168,18 @@ function hasProperty<
 
 /** Проверка наличия ключа с объектом в значении */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: 'object',
+): object is {
+  [key in K]: ObjectInterface<unknown>;
+};
+/** Проверка наличия ключа с объектом в значении */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -130,7 +190,6 @@ function hasProperty<
   } &
   Required<{
     [key in K]: ExtractDefaultOrSet<
-      // @ts-ignore
       T[key],
       ObjectInterface
     >;
@@ -139,8 +198,18 @@ function hasProperty<
 
 /** Проверка наличия ключа с массивом в значении */
 function hasProperty<
+  K extends UnknownKeysInterface
+>(
+  object: unknown,
+  property: K | Array<K>,
+  isExist: 'array',
+): object is {
+  [key in K]: Array<unknown>;
+};
+/** Проверка наличия ключа с массивом в значении */
+function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
@@ -151,12 +220,8 @@ function hasProperty<
   } &
   Required<{
     [key in K]: ExtractDefaultOrSet<
-      // @ts-ignore
       T[key],
-      Array<
-        // @ts-ignore
-        T[key][0]
-      >
+      Array<T[key][0]>
     >;
   }>
 );
@@ -167,11 +232,11 @@ function hasProperty<
  */
 function hasProperty<
   T extends FirstArgumentInterface,
-  K extends keyof Exclude<T, unknown>
+  K extends keyof T
 >(
   object: T,
   property: K | Array<K>,
-  isRequired: boolean | HasPropertyExistInterface | void,
+  isRequired: HasPropertyExistInterface | void,
 ) {
   const properties = isArray(property)
     ? property
