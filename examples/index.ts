@@ -1,15 +1,13 @@
 import hasProperty from '../src';
 
-/**
- * Откройте в IDE и проверьте типы констант `value`
- */
+/* Откройте в IDE и проверьте типы констант `value` */
 
 const key = 'someKey';
 const data: Record<
   string,
-  string |
-  number |
-  boolean |
+  'some' | 'text' |
+  27 | 13 |
+  true |
   Array<string | number> |
   {
     value: string;
@@ -17,7 +15,22 @@ const data: Record<
   } |
   undefined |
   null
-> = {};
+> = {/* some content */};
+
+const anyData: unknown = 'something';
+
+// UNKNOWN | ANY TYPES
+
+if (hasProperty(anyData, key, 'object')) {
+  const value = anyData.someKey;
+  const orValue = anyData[key];
+}
+
+if (hasProperty(anyData, key, 'string')) {
+  const value = anyData.someKey;
+}
+
+// DEFINED TYPE
 
 if (hasProperty(data, key, 'object')) {
   const value = data.someKey;

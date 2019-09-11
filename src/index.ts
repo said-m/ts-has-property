@@ -1,7 +1,11 @@
 import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
-import { ExtractTypeOrSet, HasPropertyExistInterface, HasPropertyExistTypeInterface } from './interfaces';
+import { ExtractTypeOrSet, HasPropertyExistInterface, HasPropertyExistTypeInterface, KeyValuesInterface } from './interfaces';
 
+/**
+ * Интерфейс первого аргумента функции
+ */
+// tslint:disable-next-line: no-any
 type CheckedInterface = any;
 
 /**
@@ -18,9 +22,7 @@ function hasProperty<
   property: Key | Array<Key>,
   isExist: void,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   {
     [key in Key]: Value[key];
   }
@@ -40,9 +42,7 @@ function hasProperty<
   property: Key | Array<Key>,
   isExist: true,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
     [key in Key]: Exclude<
       Value[key],
@@ -69,9 +69,7 @@ function hasProperty<
     'boolean'
   >,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
       Value[key],
@@ -98,9 +96,7 @@ function hasProperty<
     'string'
   >,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
       Value[key],
@@ -127,9 +123,7 @@ function hasProperty<
     'number'
   >,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
       Value[key],
@@ -152,21 +146,15 @@ function hasProperty<
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
     Value[Key],
-    ObjectInterface<any>,
+    ObjectInterface<unknown>,
     'object'
   >,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
-    [key in Key]: Exclude<
-      ExtractTypeOrSet<
-        // Extract<Value[key], ObjectInterface<any>>,
-        Value[key],
-        ObjectInterface<any>
-      >,
-      Array<any>
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      ObjectInterface<unknown>
     >;
   }>
 );
@@ -185,16 +173,13 @@ function hasProperty<
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
     Value[Key],
-    Array<any>,
+    Array<unknown>,
     'array'
   >,
 ): object is (
-  {
-    [key in keyof Value]: Value[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
-      // Extract<Value[key], Array<any>>,
       Value[key],
       Array<Value[key][0]>
     >;
@@ -221,36 +206,36 @@ function hasProperty<
     thisProperty => {
       try {
         Object.hasOwnProperty.call(object, thisProperty);
+
+        const hasStatus = Object.hasOwnProperty.call(
+          object,
+          thisProperty,
+        );
+
+        if (isRequired && hasStatus) {
+          const value = object[thisProperty];
+
+          switch (isRequired) {
+            case true:
+              return value !== undefined &&
+              value !== null;
+            case 'boolean':
+              return typeof value === 'boolean';
+            case 'string':
+              return typeof value === 'string';
+            case 'number':
+              return typeof value === 'number';
+            case 'object':
+              return isPlainObject(value);
+            case 'array':
+              return isArray(value);
+          }
+        }
+
+        return hasStatus;
       } catch {
         return false;
       }
-
-      const hasStatus = Object.hasOwnProperty.call(
-        object,
-        thisProperty,
-      );
-
-      if (isRequired && hasStatus) {
-        const value = object[thisProperty];
-
-        switch (isRequired) {
-          case true:
-            return value !== undefined &&
-            value !== null;
-          case 'boolean':
-            return typeof value === 'boolean';
-          case 'string':
-            return typeof value === 'string';
-          case 'number':
-            return typeof value === 'number';
-          case 'object':
-            return isPlainObject(value);
-          case 'array':
-            return isArray(value);
-        }
-      }
-
-      return hasStatus;
     },
   );
 }

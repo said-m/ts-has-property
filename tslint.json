@@ -1,8 +1,5 @@
 {
   "extends": [
     "@said-m/common/tslint.json"
-  ],
-  "rules": {
-    "no-any": false
-  }
+  ]
 }

@@ -1,11 +1,19 @@
 
+/**
+ * Вытягивает оригинальный интерфейс из `Source`,
+ * который соответствует `Type`.
+ * Если в `Source` его нет, объекту присваивается `Type`.
+ */
 export type ExtractTypeOrSet<
   Source,
   Type
-> = Source extends Type
-  ? Source
-  : Extract<Type, Source>;
+> = unknown extends Source
+  ? Type
+  : Extract<Source, Type>;
 
+/**
+ * Допустимые значения 3-го аргумента функции.
+ */
 export type HasPropertyExistInterface = true |
   'boolean' |
   'string' |
@@ -13,6 +21,10 @@ export type HasPropertyExistInterface = true |
   'object' |
   'array';
 
+/**
+ * Проверяет `Value` на соответствие `Extend`,
+ * если совпадают, то возвращается `Type`.
+ */
 export type HasPropertyExistTypeInterface<
   Value,
   Extend,
@@ -24,3 +36,7 @@ export type HasPropertyExistTypeInterface<
       ? Type
       : never
   );
+
+export type KeyValuesInterface<Value> = {
+  [key in keyof Value]: Value[key];
+};
