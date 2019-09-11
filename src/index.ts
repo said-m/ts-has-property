@@ -205,8 +205,6 @@ function hasProperty<
   return properties.every(
     thisProperty => {
       try {
-        Object.hasOwnProperty.call(object, thisProperty);
-
         const hasStatus = Object.hasOwnProperty.call(
           object,
           thisProperty,
