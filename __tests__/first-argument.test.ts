@@ -4,7 +4,7 @@ const key = 'toString';
 
 describe('Handles successfully', () => {
   test('`Object`', () => {
-    const data: any = {
+    const data: unknown = {
       [key]: undefined,
     };
 
@@ -14,6 +14,7 @@ describe('Handles successfully', () => {
   });
 
   test('`Object.create(null)`', () => {
+    // tslint:disable-next-line: no-any
     const data: any = Object.create(null);
     data[key] = key;
 
@@ -25,7 +26,7 @@ describe('Handles successfully', () => {
 
 describe('Rejects data types', () => {
   test('`Null`', () => {
-    const data: any = null;
+    const data: unknown = null;
 
     expect(
       hasProperty(data, key),
@@ -33,7 +34,7 @@ describe('Rejects data types', () => {
   });
 
   test('`Array`', () => {
-    const data: any = [];
+    const data: unknown = [];
 
     expect(
       hasProperty(data, key),
@@ -41,7 +42,7 @@ describe('Rejects data types', () => {
   });
 
   test('`String`', () => {
-    const data: any = '';
+    const data: unknown = '';
 
     expect(
       hasProperty(data, key),
@@ -49,7 +50,7 @@ describe('Rejects data types', () => {
   });
 
   test('`Number`', () => {
-    const data: any = 27;
+    const data: unknown = 27;
 
     expect(
       hasProperty(data, key),
@@ -57,7 +58,7 @@ describe('Rejects data types', () => {
   });
 
   test('`undefined`', () => {
-    const data: any = undefined;
+    const data: unknown = undefined;
 
     expect(
       hasProperty(data, key),
