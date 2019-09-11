@@ -30,8 +30,8 @@ test('Only own properties', () => {
 });
 
 test('`Symbol`', () => {
-  const symbolKey: any = Symbol();
-  const store: any = {
+  const symbolKey = Symbol();
+  const store: unknown = {
     [symbolKey]: undefined,
   };
 
@@ -45,7 +45,7 @@ test('`Array` of keys', () => {
     'key1',
     'key2',
   ];
-  const store: any = {
+  const store: unknown = {
     [keys[0]]: undefined,
     [keys[1]]: undefined,
   };

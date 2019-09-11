@@ -1,66 +1,55 @@
+import { ObjectInterface } from '@said-m/common/dist/interfaces';
 import hasProperty from '../src';
 
 const key = 'toString';
 
-describe('Handles successfully', () => {
-  test('`Object`', () => {
-    const data: any = {
-      [key]: undefined,
-    };
+test('`Object`', () => {
+  expect(
+    hasProperty(
+      {
+        [key]: undefined,
+      },
+      key,
+    ),
+  ).toBeTruthy();
 
-    expect(
-      hasProperty(data, key),
-    ).toBeTruthy();
-  });
+  const collection: ObjectInterface = Object.create(null);
+  collection[key] = key;
 
-  test('`Object.create(null)`', () => {
-    const data: any = Object.create(null);
-    data[key] = key;
-
-    expect(
-      hasProperty(data, key),
-    ).toBeTruthy();
-  });
+  expect(
+    hasProperty(collection, key),
+  ).toBeTruthy();
 });
 
-describe('Rejects data types', () => {
-  test('`Null`', () => {
-    const data: any = null;
+test('`Array`', () => {
+  const data: Array<unknown> = [undefined];
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+  console.log(data);
+  expect(
+    hasProperty(data, 0),
+  ).toBeTruthy();
 
-  test('`Array`', () => {
-    const data: any = [];
+  expect(
+    hasProperty(data, data.length),
+  ).toBeFalsy();
+});
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+test('`String`', () => {
+  expect(
+    hasProperty(key, 0),
+  ).toBeTruthy();
 
-  test('`String`', () => {
-    const data: any = '';
+  expect(
+    hasProperty(key, key.length),
+  ).toBeFalsy();
+});
 
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+test.only('Values without properties', () => {
+  expect(
+    hasProperty(null, key),
+  ).toBeFalsy();
 
-  test('`Number`', () => {
-    const data: any = 27;
-
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
-
-  test('`undefined`', () => {
-    const data: any = undefined;
-
-    expect(
-      hasProperty(data, key),
-    ).toBeFalsy();
-  });
+  expect(
+    hasProperty(undefined, key),
+  ).toBeFalsy();
 });

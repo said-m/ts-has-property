@@ -1,148 +1,202 @@
 import { isArray, isPlainObject } from '@said-m/common';
 import { ObjectInterface } from '@said-m/common/dist/interfaces';
+import { ExtractTypeOrSet, HasPropertyExistInterface, HasPropertyExistTypeInterface, KeyValuesInterface } from './interfaces';
 
+/**
+ * Интерфейс первого аргумента функции
+ */
 // tslint:disable-next-line: no-any
-type FirstArgumentInterface = ObjectInterface<any>;
-type ExtractDefaultOrSet<T, U> = T extends U
-  ? T
-  // tslint:disable-next-line: no-any
-  : T extends any
-    ? U
-    : T extends unknown
-      ? U
-      : never;
+type CheckedInterface = any;
 
-export type HasPropertyExistInterface = 'boolean' | 'string' | 'number' | 'object' | 'array';
-
-/** Проверка наличия ключа */
+/**
+ * Indicating whether the value has the
+ * specified property as its own property.
+ *
+ * Проверка наличия **ключа**
+ */
 function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
 >(
-  object: T,
-  property: K | Array<K>,
+  object: Value,
+  property: Key | Array<Key>,
   isExist: void,
 ): object is (
+  KeyValuesInterface<Value> &
   {
-    [key in keyof T]: T[key];
-  } & {
-    [key in K]: T[key];
+    [key in Key]: Value[key];
   }
 );
 
-/** Проверка наличия ключа и его значения */
+/**
+ * Indicating whether the value has the
+ * specified property of non-`Null`/`Undefined`.
+ *
+ * Проверка наличия **ключа** и его **значения**
+ */
 function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
 >(
-  object: T,
-  property: K | Array<K>,
+  object: Value,
+  property: Key | Array<Key>,
   isExist: true,
 ): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
+  KeyValuesInterface<Value> &
   Required<{
-    [key in K]: Exclude<T[key], undefined | null>;
-  }>
-);
-
-/** Проверка наличия ключа с булевым значением */
-function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
->(
-  object: T,
-  property: K | Array<K>,
-  isExist: 'boolean',
-): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
-  Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], boolean>;
-  }>
-);
-
-/** Проверка наличия ключа со строковым значением */
-function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
->(
-  object: T,
-  property: K | Array<K>,
-  isExist: 'string',
-): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
-  Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], string>;
-  }>
-);
-
-/** Проверка наличия ключа с числовым значением */
-function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
->(
-  object: T,
-  property: K | Array<K>,
-  isExist: 'number',
-): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
-  Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], number>;
-  }>
-);
-
-/** Проверка наличия ключа с объектом в значении */
-function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
->(
-  object: T,
-  property: K | Array<K>,
-  isExist: 'object',
-): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
-  Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], ObjectInterface>;
-  }>
-);
-
-/** Проверка наличия ключа с массивом в значении */
-function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
->(
-  object: T,
-  property: K | Array<K>,
-  isExist: 'array',
-): object is (
-  {
-    [key in keyof T]: T[key];
-  } &
-  Required<{
-    [key in K]: ExtractDefaultOrSet<T[key], Array<T[key][0]>>;
+    [key in Key]: Exclude<
+      Value[key],
+      undefined | null
+    >;
   }>
 );
 
 /**
- * Indicating whether the object has the
- * specified property as its own property
+ * Indicating whether the value has the
+ * specified property of type `Boolean`.
+ *
+ * Проверка наличия ключа с **булевым** значением
  */
 function hasProperty<
-  T extends FirstArgumentInterface,
-  K extends keyof T
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
 >(
-  object: T,
-  property: K | Array<K>,
-  isRequired: boolean | HasPropertyExistInterface | void,
+  object: Value,
+  property: Key | Array<Key>,
+  isExist: HasPropertyExistTypeInterface<
+    Value[Key],
+    boolean,
+    'boolean'
+  >,
+): object is (
+  KeyValuesInterface<Value> &
+  Required<{
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      boolean
+    >;
+  }>
+);
+
+/**
+ * Indicating whether the value has the
+ * specified property of type `String`.
+ *
+ * Проверка наличия ключа со **строковым** значением
+ */
+function hasProperty<
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
+>(
+  object: Value,
+  property: Key | Array<Key>,
+  isExist: HasPropertyExistTypeInterface<
+    Value[Key],
+    string,
+    'string'
+  >,
+): object is (
+  KeyValuesInterface<Value> &
+  Required<{
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      string
+    >;
+  }>
+);
+
+/**
+ * Indicating whether the value has the
+ * specified property of type `Number`.
+ *
+ * Проверка наличия ключа с **числовым** значением
+ */
+function hasProperty<
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
+>(
+  object: Value,
+  property: Key | Array<Key>,
+  isExist: HasPropertyExistTypeInterface<
+    Value[Key],
+    number,
+    'number'
+  >,
+): object is (
+  KeyValuesInterface<Value> &
+  Required<{
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      number
+    >;
+  }>
+);
+
+/**
+ * Indicating whether the value has the
+ * specified property of type `Object`.
+ *
+ * Проверка наличия ключа с **объектом** в значении
+ */
+function hasProperty<
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
+>(
+  object: Value,
+  property: Key | Array<Key>,
+  isExist: HasPropertyExistTypeInterface<
+    Value[Key],
+    ObjectInterface<unknown>,
+    'object'
+  >,
+): object is (
+  KeyValuesInterface<Value> &
+  Required<{
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      ObjectInterface<unknown>
+    >;
+  }>
+);
+
+/**
+ * Indicating whether the value has the
+ * specified property of type `Array`.
+ *
+ * Проверка наличия ключа с **массивом** в значении
+ */
+function hasProperty<
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
+>(
+  object: Value,
+  property: Key | Array<Key>,
+  isExist: HasPropertyExistTypeInterface<
+    Value[Key],
+    Array<unknown>,
+    'array'
+  >,
+): object is (
+  KeyValuesInterface<Value> &
+  Required<{
+    [key in Key]: ExtractTypeOrSet<
+      Value[key],
+      Array<Value[key][0]>
+    >;
+  }>
+);
+
+/**
+ * Indicating whether the value has the
+ * specified property as its own property.
+ */
+function hasProperty<
+  Value extends CheckedInterface,
+  Key extends keyof Exclude<Value, unknown>
+>(
+  object: Value,
+  property: Key | Array<Key>,
+  isRequired: HasPropertyExistInterface | void,
 ) {
   const properties = isArray(property)
     ? property
@@ -150,33 +204,36 @@ function hasProperty<
 
   return properties.every(
     thisProperty => {
-      if (!isPlainObject(object)) {
+      try {
+        const hasStatus = Object.hasOwnProperty.call(
+          object,
+          thisProperty,
+        );
+
+        if (isRequired && hasStatus) {
+          const value = object[thisProperty];
+
+          switch (isRequired) {
+            case true:
+              return value !== undefined &&
+              value !== null;
+            case 'boolean':
+              return typeof value === 'boolean';
+            case 'string':
+              return typeof value === 'string';
+            case 'number':
+              return typeof value === 'number';
+            case 'object':
+              return isPlainObject(value);
+            case 'array':
+              return isArray(value);
+          }
+        }
+
+        return hasStatus;
+      } catch {
         return false;
       }
-
-      const hasStatus = Object.hasOwnProperty.call(object, thisProperty);
-
-      if (isRequired && hasStatus) {
-        const value = object[thisProperty];
-
-        switch (isRequired) {
-          case true:
-            return value !== undefined &&
-            value !== null;
-          case 'boolean':
-            return typeof value === 'boolean';
-          case 'string':
-            return typeof value === 'string';
-          case 'number':
-            return typeof value === 'number';
-          case 'object':
-            return isPlainObject(value);
-          case 'array':
-            return isArray(value);
-        }
-      }
-
-      return hasStatus;
     },
   );
 }
