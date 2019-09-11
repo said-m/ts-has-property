@@ -16,6 +16,11 @@
 
 Пока не в версии, но уже сделано.
 
+## [2.0.0] - 2019-09-12
+
+### Changed
+- Проверка свойств всех типов данных.
+
 ## [1.1.1] - 2019-09-09
 
 ### Added
@@ -107,8 +112,10 @@
 - Базовая докуменатция;
 - `Git LFS` для всех ассетов.
 
+<!-- LINKS -->
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/1.1.1...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/2.0.0...develop
+[2.0.0]: https://github.com/said-m/ts-has-property/compare/1.1.1...2.0.0
 [1.1.1]: https://github.com/said-m/ts-has-property/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/said-m/ts-has-property/compare/1.0.5...1.1.0
 [1.0.5]: https://github.com/said-m/ts-has-property/compare/1.0.4...1.0.5
