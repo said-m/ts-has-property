@@ -16,7 +16,7 @@ type CheckedInterface = any;
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -36,7 +36,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -59,7 +59,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -86,7 +86,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -113,7 +113,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -140,7 +140,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -167,7 +167,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
@@ -192,7 +192,7 @@ function hasProperty<
  */
 function hasProperty<
   Value extends CheckedInterface,
-  Key extends keyof Exclude<Value, unknown>
+  Key extends keyof Extract<Value, ObjectInterface>
 >(
   object: Value,
   property: Key | Array<Key>,
