@@ -46,7 +46,7 @@ function hasProperty<
   Required<{
     [key in Key]: Exclude<
       Value[key],
-      undefined | null
+      undefined | null | void
     >;
   }>
 );
