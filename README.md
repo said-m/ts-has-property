@@ -7,10 +7,10 @@ Universal and better typed `hasOwnProperty` for better IntelliSense - code hinti
 [![Coverage Status](https://coveralls.io/repos/github/said-m/ts-has-property/badge.svg?branch=master)](https://coveralls.io/github/said-m/ts-has-property?branch=master)
 [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
-**RU**: Универсальный и более типизированный аналог `hasOwnProperty` для **улучшения подсказок** при работе в IDE-шках (редакторах кода). Также, метод поддерживает проверку свойств всех типов данных, позволяет перечислить сразу **несколько ключей**, опционально можно задать проверку на тип значения, а также корректно работает с коллекциями, созданными через `Object.create(null)`.
+**RU**: Универсальный и более типизированный аналог `hasOwnProperty` для **улучшения подсказок** при работе в IDE-шках (редакторах кода). Также, метод поддерживает проверку **свойств всех типов** данных, позволяет перечислить сразу **несколько ключей**, опционально можно задать проверку на **тип значения**, а также корректно работает с коллекциями, созданными через `Object.create(null)`.
 
 > * Do not use `any` type, please.
-> * Use `unknown` if you thought about `any`.
+> * Use `unknown` if you thing about `any`.
 > * If you working with third party module and have to suffer from `any`, so `ts-has-property` may be very useful, may-be...
 
 ## Navigation / Навигация
@@ -27,6 +27,7 @@ Universal and better typed `hasOwnProperty` for better IntelliSense - code hinti
 * [Demo / Демонстрация](#Demo--Демонстрация)
   * [`Enum` member values / Пример с `Enum`-ом](#Enum-member-values--Пример-с-Enum-ом)
   * [Multiple keys / Несколько ключей](#Multiple-keys--Несколько-ключей)
+  * [Type check / Проверка типа](#Type-check--Проверка-типа)
 * [Note / Замечание](#Note--Замечание)
 * [Author / Автор](#Author--Автор)
 * [License / Лицензия](#License--Лицензия)
@@ -61,7 +62,7 @@ if (hasProperty(data, 'someKey')) {
 }
 ```
 
-> @see [Examples]
+> @see [Examples] \
 > Смотрите [Примеры][examples]
 
 ### Major versions / Основные версии
@@ -74,7 +75,7 @@ if (hasProperty(data, 'someKey')) {
 #### 2.\*.\*
 
 > **EN**: Unlike the first version, all types are now supported as the first argument. \
-> **RU**: С данной версии, в качестве первого аргумента принимаются значения любого типа.
+> **RU**: С данной версии, проверяются свойства любого значения, передаваемого первым аргументом.
 
 ### `Required<>` values / Обязательность значений
 
