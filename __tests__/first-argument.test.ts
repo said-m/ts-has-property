@@ -24,7 +24,6 @@ test('`Object`', () => {
 test('`Array`', () => {
   const data: Array<unknown> = [undefined];
 
-  console.log(data);
   expect(
     hasProperty(data, 0),
   ).toBeTruthy();

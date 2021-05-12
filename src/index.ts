@@ -24,6 +24,7 @@ function hasProperty<
 ): object is (
   KeyValuesInterface<Value> &
   {
+    // @ts-ignore
     [key in Key]: Value[key];
   }
 );
@@ -45,6 +46,7 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: Exclude<
+      // @ts-ignore
       Value[key],
       undefined | null | void
     >;
@@ -64,6 +66,7 @@ function hasProperty<
   object: Value,
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
+    // @ts-ignore
     Value[Key],
     boolean,
     'boolean'
@@ -72,6 +75,7 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
+      // @ts-ignore
       Value[key],
       boolean
     >;
@@ -91,6 +95,7 @@ function hasProperty<
   object: Value,
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
+    // @ts-ignore
     Value[Key],
     string,
     'string'
@@ -99,6 +104,7 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
+      // @ts-ignore
       Value[key],
       string
     >;
@@ -118,6 +124,7 @@ function hasProperty<
   object: Value,
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
+    // @ts-ignore
     Value[Key],
     number,
     'number'
@@ -126,6 +133,7 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
+      // @ts-ignore
       Value[key],
       number
     >;
@@ -145,6 +153,7 @@ function hasProperty<
   object: Value,
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
+    // @ts-ignore
     Value[Key],
     ObjectInterface<unknown>,
     'object'
@@ -153,6 +162,7 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
+      // @ts-ignore
       Value[key],
       ObjectInterface<unknown>
     >;
@@ -172,6 +182,7 @@ function hasProperty<
   object: Value,
   property: Key | Array<Key>,
   isExist: HasPropertyExistTypeInterface<
+    // @ts-ignore
     Value[Key],
     Array<unknown>,
     'array'
@@ -180,7 +191,9 @@ function hasProperty<
   KeyValuesInterface<Value> &
   Required<{
     [key in Key]: ExtractTypeOrSet<
+      // @ts-ignore
       Value[key],
+      // @ts-ignore
       Array<Value[key][0]>
     >;
   }>
@@ -211,6 +224,7 @@ function hasProperty<
         );
 
         if (isRequired && hasStatus) {
+          // @ts-ignore
           const value = object[thisProperty];
 
           switch (isRequired) {
