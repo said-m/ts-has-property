@@ -28,19 +28,20 @@
     "test:coverage": "yarn test --coverage",
     "test-ci": "yarn test:coverage && cat ./coverage/lcov.info | coveralls",
     "prepack": "yarn build",
-    "postpack": "rm -rf ./dist"
+    "postpack": "rm -rf ./dist",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "@said-m/common": "0.0.4"
+    "@said-m/common": "1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.2",
     "coveralls": "^3.0.6",
-    "husky": "^3.0.4",
-    "jest": "^25.5.4",
-    "ts-jest": "^25.4.0",
-    "tslint": "^6.1.2",
-    "typescript": "^3.8.3"
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.6",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.4"
   }
 }
