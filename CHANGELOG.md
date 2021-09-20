@@ -16,6 +16,11 @@
 
 Пока не в версии, но уже сделано.
 
+## [2.1.2] - 2021-09-20
+
+### Removed
+- Поддержка Node.js < 12
+
 ## [2.1.1] - 2021-09-20
 
 ### Security
@@ -142,7 +147,8 @@
 
 <!-- LINKS -->
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/2.1.1...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/2.1.2...develop
+[2.1.2]: https://github.com/said-m/ts-has-property/compare/2.1.1...2.1.2
 [2.1.1]: https://github.com/said-m/ts-has-property/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/said-m/ts-has-property/compare/2.0.2...2.1.0
 [2.0.2]: https://github.com/said-m/ts-has-property/compare/2.0.1...2.0.2
