@@ -1,6 +1,6 @@
 {
   "name": "ts-has-property",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Universal and better typed `hasOwnProperty` for IntelliSense. Supports checking: properties of all types; multiple keys at a time; and type of values.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
