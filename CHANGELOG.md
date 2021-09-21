@@ -16,6 +16,16 @@
 
 Пока не в версии, но уже сделано.
 
+## [2.1.3] - 2021-09-21
+
+### Changed
+- Настройка `travis-ci` для обработки покрытия тестирования после успешной публикации, а не вместе с тестами. \
+  Нужно на случай, если вдруг чего случится с `coveralls`, чтобы не блокировался деплой, как это случилось [2021-09-20](https://status.coveralls.io/incidents/ppvnbpd172gy).
+
+### Security
+- Обновление зависимостей \
+  (проблемы не во мне, а в остальных...)
+
 ## [2.1.2] - 2021-09-20
 
 ### Removed
@@ -147,7 +157,8 @@
 
 <!-- LINKS -->
 
-[Unreleased]: https://github.com/said-m/ts-has-property/compare/2.1.2...develop
+[Unreleased]: https://github.com/said-m/ts-has-property/compare/2.1.3...develop
+[2.1.3]: https://github.com/said-m/ts-has-property/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/said-m/ts-has-property/compare/2.1.1...2.1.2
 [2.1.1]: https://github.com/said-m/ts-has-property/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/said-m/ts-has-property/compare/2.0.2...2.1.0
