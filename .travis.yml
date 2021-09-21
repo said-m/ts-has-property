@@ -2,7 +2,6 @@ language: node_js
 
 node_js:
   - '12'
-  - '14'
 
 branches:
   only:
@@ -16,7 +15,7 @@ cache:
     - 'node_modules'
 
 script:
-  - yarn test-ci
+  - yarn test:coverage
 
 deploy:
   provider: npm
@@ -25,3 +24,6 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+
+after_success:
+  - yarn coveralls
